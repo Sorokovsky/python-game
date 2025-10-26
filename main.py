@@ -1,10 +1,9 @@
-from vector import Vector
-from window import Window
+from game import Game
 
 
 def main() -> None:
-    window = Window(Vector(1200, 800))
-    window.update()
+    game = Game()
+    game.start()
 
 
 if __name__ == "__main__":
