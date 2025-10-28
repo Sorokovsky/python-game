@@ -1,23 +1,23 @@
 import pygame.event
-from engine.window import Window
-from engine.vector import Vector
-from engine.game_object import GameObject
 from pygame.constants import QUIT
-import time
+
+from engine.game_object import GameObject
+from engine.time import Time
+from engine.vector import Vector
+from engine.window import Window
 
 
 class Scene:
     _window: Window
     _objects: list[GameObject]
     _is_running: bool
-
-    _fps: int
+    _timer: Time
 
     def __init__(self: "Scene", size: Vector, fps: int = 120) -> None:
         self._window = Window(size)
         self._objects = []
         self._is_running = False
-        self._fps = fps
+        self._timer = Time(fps)
 
     def start(self: "Scene") -> None:
         pass
@@ -38,7 +38,7 @@ class Scene:
     def _update_objects(self: "Scene") -> None:
         self._window.clear()
         for object in self._objects:
-            object.update()
+            object.update(self._timer.get_fps())
             self._window.draw(object)
         pygame.display.flip()
 
@@ -46,3 +46,4 @@ class Scene:
         while self._is_running:
             self._update_objects()
             self._on_close()
+            self._timer.update()

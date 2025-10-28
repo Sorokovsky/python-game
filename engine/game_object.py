@@ -25,7 +25,7 @@ class GameObject(abc.ABC):
         return self._surface
 
     @abc.abstractmethod
-    def update(self: "GameObject") -> None:
+    def update(self: "GameObject", fps: int) -> None:
         pass
 
     def get_position(self: "GameObject") -> Vector:
