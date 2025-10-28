@@ -1,13 +1,13 @@
 class Vector:
-    _width: int
-    _height: int
+    _x: int
+    _y: int
 
-    def __init__(self: "Vector", width: int, height: int) -> None:
-        self._width = width
-        self._height = height
+    def __init__(self: "Vector", x: int, y: int) -> None:
+        self._x = x
+        self._y = y
 
-    def get_width(self: "Vector") -> int:
-        return self._width
+    def get_x(self: "Vector") -> int:
+        return self._x
 
-    def get_height(self: "Vector") -> int:
-        return self._height
+    def get_y(self: "Vector") -> int:
+        return self._y
