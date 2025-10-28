@@ -1,7 +1,7 @@
 import pygame
 
-from vector import Vector
-from game_object import GameObject
+from engine.vector import Vector
+from engine.game_object import GameObject
 
 
 class Window:
@@ -22,3 +22,5 @@ class Window:
         y = game_object.get_position().get_y()
         self._display.blit(game_object.get_surface(), (x, y))
 
+    def clear(self: "Window") -> None:
+        self._display.fill((0, 0, 0))

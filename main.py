@@ -1,15 +1,14 @@
-from game_object import GameObject
-from scene import Scene
-from vector import Vector
-from color import Color
+from player import Player
+from engine.scene import Scene
+from engine.vector import Vector
+from engine.color import Color
 
 
 def main() -> None:
-    player = GameObject(Vector(12, 12), Vector(12, 12))
+    player = Player(Vector(12, 12), Vector(12, 12))
     player.set_color(Color(255, 255, 255))
     scene = Scene(Vector(1200, 800))
     scene.add_object(player)
-
     scene.run()
 
 

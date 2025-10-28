@@ -1,10 +1,12 @@
+import abc
+
 import pygame
 
-from color import Color
-from vector import Vector
+from engine.color import Color
+from engine.vector import Vector
 
 
-class GameObject:
+class GameObject(abc.ABC):
     _size: Vector
     _position: Vector
     _color: Color
@@ -21,6 +23,10 @@ class GameObject:
 
     def get_surface(self: "GameObject") -> pygame.Surface:
         return self._surface
+
+    @abc.abstractmethod
+    def update(self: "GameObject") -> None:
+        pass
 
     def get_position(self: "GameObject") -> Vector:
         return self._position
