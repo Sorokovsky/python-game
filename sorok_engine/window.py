@@ -1,13 +1,14 @@
-import pygame
+from pygame import Surface, init
+from pygame.display import set_mode, flip
 
 
 class Window:
     _width: int
     _height: int
-    _display: pygame.Surface
+    _display: Surface
 
     def __init__(self: "Window", width: int = 1200, height: int = 800) -> None:
-        pygame.init()
+        init()
         self.set_width(width)
         self.set_height(height)
         self._setup_display()
@@ -19,7 +20,7 @@ class Window:
         self._height = height
 
     def _setup_display(self: "Window") -> None:
-        self._display = pygame.display.set_mode((self._width, self._height))
+        self._display = set_mode((self._width, self._height))
 
     def draw(self: "Window") -> None:
-        pygame.display.flip()
+        flip()
