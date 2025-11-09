@@ -20,3 +20,11 @@ def create_player() -> list[Surface | Rect | list[int]]:
     player_rect = player.get_rect()
     player_move = [-1, 0]
     return [player, player_rect, player_move]
+
+def create_bonus() -> list[Surface | Rect | list[int]]:
+    bonus_size = BONUS_SIZE
+    bonus = pygame.Surface(bonus_size)
+    bonus.fill(RED)
+    bonus_rect = pygame.Rect(WIDTH, random.randint(0, HEIGHT), *bonus_size)
+    bonus_move = [random.randint(-6, -1), 0]
+    return [bonus, bonus_rect, bonus_move]
