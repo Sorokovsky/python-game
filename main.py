@@ -26,6 +26,10 @@ def main() -> None:
     while is_playing:
         background_x1 -= background_move
         background_move -= background_move
+        if background_x1 < -background.get_width():
+            background_x1 = background.get_width()
+        if background_x2 < -background.get_width():
+            background_x2 = background.get_width()
         main_display.blit(background, (background_x1, 0))
         main_display.blit(background, (background_x2, 0))
         for event in pygame.event.get():
