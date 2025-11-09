@@ -16,7 +16,7 @@ def create_enemy() -> list[Surface | Rect | list[int]]:
 def create_player() -> list[Surface | Rect | list[int]]:
     player_size = PLAYER_SIZE
     player = pygame.Surface(player_size, pygame.SRCALPHA)
-    image = pygame.image.load("images/player.png").convert_alpha()
+    image = pygame.transform.scale(pygame.image.load("images/player.png").convert_alpha(), player_size)
     player.blit(image, (0, 0))
     player_rect = player.get_rect()
     player_move = [-1, 0]
