@@ -16,7 +16,7 @@ def create_enemy() -> list[Surface | Rect | list[int]]:
 def create_player() -> list[Surface | Rect | list[int]]:
     player_size = PLAYER_SIZE
     player = pygame.Surface(player_size)
-    player.fill(WHITE)
+    player.fill(pygame.image.load("images/player.png").convert_alpha())
     player_rect = player.get_rect()
     player_move = [-1, 0]
     return [player, player_rect, player_move]
