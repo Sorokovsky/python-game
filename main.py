@@ -6,6 +6,14 @@ from collors import *
 
 
 def main() -> None:
+    player_move_down = [0, 4]
+
+    player_move_up = [0, -4]
+
+    player_move_right = [4, 0]
+
+    player_move_left = [-4, 0]
+
     background = pygame.transform.scale(pygame.image.load('images/background.png'), (WIDTH, HEIGHT))
     background_x1 = 0
     background_x2 = background.get_width()
@@ -15,7 +23,6 @@ def main() -> None:
     font = pygame.font.SysFont("Verdana", 20)
     clock = pygame.time.Clock()
     [player, player_rect, player_move] = create_player()
-    [bonus, bonus_rect, bonus_move] = create_bonus()
     score = 0
 
     is_playing = True
@@ -44,10 +51,16 @@ def main() -> None:
         player_speed = [0, 0]
 
         if keys[pygame.K_DOWN] and player_rect.bottom < HEIGHT:
-            player_speed = [0, 1]
+            player_speed = player_move_down
 
         if keys[pygame.K_UP] and player_rect.top > 0:
-            player_speed = [0, -1]
+            player_speed = player_move_up
+
+        if keys[pygame.K_LEFT] and player_rect.left > 0:
+            player_speed = player_move_left
+
+        if keys[pygame.K_RIGHT] and player_rect.right < WIDTH:
+            player_speed = player_move_right
 
         for enemy in enemies:
             enemy[1] = enemy[1].move(enemy[2])

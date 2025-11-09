@@ -10,7 +10,7 @@ def create_enemy() -> list[Surface | Rect | list[int]]:
     enemy = pygame.Surface(enemy_size)
     enemy.fill(BLUE)
     enemy_rect = pygame.Rect(WIDTH, random.randint(0, HEIGHT), *enemy_size)
-    enemy_move = [random.randint(-6, -1), 0]
+    enemy_move = [random.randint(-8, -4), 0]
     return [enemy, enemy_rect, enemy_move]
 
 def create_player() -> list[Surface | Rect | list[int]]:
@@ -26,5 +26,5 @@ def create_bonus() -> list[Surface | Rect | list[int]]:
     bonus = pygame.Surface(bonus_size)
     bonus.fill(RED)
     bonus_rect = pygame.Rect(WIDTH, random.randint(0, HEIGHT), *bonus_size)
-    bonus_move = [random.randint(-6, -1), 0]
+    bonus_move = [random.randint(-8, -4), 0]
     return [bonus, bonus_rect, bonus_move]
