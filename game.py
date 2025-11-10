@@ -3,6 +3,7 @@ from pygame.constants import QUIT
 from pygame.display import set_mode, flip
 from pygame.event import post, get, Event
 from pygame.key import get_pressed
+from pygame.time import Clock
 
 from behavious.behaviour import Behaviour
 from constants.events import START_GAME, STOP_GAME
@@ -12,17 +13,20 @@ from constants.sizes import WIDTH, HEIGHT
 class Game:
     _behaviors: list[Behaviour]
     _display: Surface
-    _is_running = False
+    _is_running = False,
+    _clock: Clock
 
     def __init__(self: "Game") -> None:
         self._behaviors = []
+        self._clock = Clock()
 
     def add_behaviour(self: "Game", behaviour: Behaviour) -> None:
         behaviour.start()
         self._behaviors.append(behaviour)
 
-    def start(self: "Game") -> None:
+    def start(self: "Game", fps: float = 120) -> None:
         init()
+        self._clock.tick(fps)
         self._display = set_mode((WIDTH, HEIGHT))
         self._is_running = True
         post(Event(START_GAME))
