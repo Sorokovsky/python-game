@@ -17,6 +17,7 @@ class Game:
     _clock: Clock
 
     def __init__(self: "Game") -> None:
+        init()
         self._behaviors = []
         self._clock = Clock()
 
@@ -25,7 +26,6 @@ class Game:
         self._behaviors.append(behaviour)
 
     def start(self: "Game", fps: float = 120) -> None:
-        init()
         self._clock.tick(fps)
         self._display = set_mode((WIDTH, HEIGHT))
         self._is_running = True
