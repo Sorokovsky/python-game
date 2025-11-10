@@ -2,13 +2,13 @@ from typing import Tuple
 from random import randint
 
 from pygame import Surface, Rect
-from pygame.event import Event
+from pygame.event import Event, post
 from pygame.key import ScancodeWrapper
 from pygame.time import set_timer
 
 from behavious.behaviour import Behaviour
 from constants.sizes import WIDTH, HEIGHT
-from constants.events import PLAYER_MOVED, CREATE_BONUS
+from constants.events import PLAYER_MOVED, CREATE_BONUS, BONUS_PLAYER_COLLIDED
 
 
 class Bonuses(Behaviour):
@@ -32,10 +32,16 @@ class Bonuses(Behaviour):
         pass
 
     def update(self: "Bonuses") -> None:
-        pass
+        for bonus in self._bonuses:
+            bonus[1] = bonus[1].move(bonus[2])
+            if self._player is not None and self._player.colliderect(bonus[1]):
+                post(Event(BONUS_PLAYER_COLLIDED))
+                self._bonuses.pop(self._bonuses.index(bonus))
+            if bonus[1].right < 0:
+                self._bonuses.pop(self._bonuses.index(bonus))
 
     def render(self: "Bonuses", parent_surface: Surface) -> None:
-        pass
+        [parent_surface.blit(bonus[0], bonus[1]) for bonus in self._bonuses]
     
     def _create(self: "Bonuses") -> list[list[int | Rect] | Rect]:
         bonus_size = self._size
