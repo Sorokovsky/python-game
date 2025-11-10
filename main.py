@@ -1,17 +1,20 @@
-import pygame.time
 import os
 
-from factories import *
-from constants.events import CREATE_ENEMY, CREATE_BONUS, GOOSE_ANIMATE
+import pygame.time
+
+from behavious.background import Background
 from constants.collors import *
+from constants.events import CREATE_ENEMY, CREATE_BONUS, GOOSE_ANIMATE
 from constants.sizes import PLAYER_SIZE
+from factories import *
+from game import Game
 
 GOOSE_PATH = "images/goose"
 
 PLAYER_IMAGES = os.listdir(GOOSE_PATH)
 
 
-def main() -> None:
+def old_main() -> None:
     player_move_down = [0, 4]
 
     player_move_up = [0, -4]
@@ -97,6 +100,11 @@ def main() -> None:
 
     pygame.quit()
 
+
+def main() -> None:
+    game = Game()
+    game.add_behaviour(Background())
+    game.start()
 
 if __name__ == "__main__":
     main()

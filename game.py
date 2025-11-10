@@ -1,10 +1,12 @@
-from behavious.behaviour import Behaviour
-from constants.sizes import WIDTH, HEIGHT
 from pygame import Surface, init
-from pygame.display import set_mode
+from pygame.constants import QUIT
+from pygame.display import set_mode, flip
 from pygame.event import post, get
 from pygame.key import get_pressed
+
+from behavious.behaviour import Behaviour
 from constants.events import START_GAME, STOP_GAME
+from constants.sizes import WIDTH, HEIGHT
 
 
 class Game:
@@ -36,7 +38,7 @@ class Game:
         for event in events:
             if event.type == START_GAME:
                 self._is_running = True
-            if event.type == STOP_GAME:
+            if event.type == STOP_GAME or event.type == QUIT:
                 self._is_running = False
 
     def _process_inputs(self: "Game") -> None:
@@ -48,3 +50,4 @@ class Game:
 
     def _render(self: "Game") -> None:
         [behaviour.render(self._display) for behaviour in self._behaviors]
+        flip()
