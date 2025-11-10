@@ -13,7 +13,8 @@ from constants.sizes import WIDTH, HEIGHT
 class Game:
     _behaviors: list[Behaviour]
     _display: Surface
-    _is_running = False,
+    _is_running: bool = False,
+    _is_paused: bool = False
     _clock: Clock
 
     def __init__(self: "Game") -> None:
@@ -35,9 +36,10 @@ class Game:
     def _loop(self: "Game") -> None:
         while self._is_running:
             self._process__events()
-            self._process_inputs()
-            self._update()
-            self._render()
+            if not self._is_paused:
+                self._process_inputs()
+                self._update()
+                self._render()
 
     def _process__events(self: "Game") -> None:
         events = get()
@@ -45,7 +47,9 @@ class Game:
         for event in events:
             if event.type == START_GAME:
                 self._is_running = True
-            if event.type == STOP_GAME or event.type == QUIT:
+            if event.type == STOP_GAME:
+                self._is_paused = True
+            if event.type == QUIT:
                 self._is_running = False
 
     def _process_inputs(self: "Game") -> None:
