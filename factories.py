@@ -2,8 +2,9 @@ import pygame
 import random
 from pygame import Surface, Rect
 
-from sizes import *
-from collors import *
+from constants.sizes import *
+from constants.collors import *
+
 
 def create_enemy() -> list[Surface | Rect | list[int]]:
     enemy_size = ENEMY_SIZE
@@ -13,6 +14,7 @@ def create_enemy() -> list[Surface | Rect | list[int]]:
     enemy_move = [random.randint(-8, -4), 0]
     return [enemy, enemy_rect, enemy_move]
 
+
 def create_player() -> list[Surface | Rect | list[int]]:
     player_size = PLAYER_SIZE
     player = pygame.Surface(player_size, pygame.SRCALPHA)
@@ -21,6 +23,7 @@ def create_player() -> list[Surface | Rect | list[int]]:
     player_rect = player.get_rect()
     player_move = [-1, 0]
     return [player, player_rect, player_move]
+
 
 def create_bonus() -> list[Surface | Rect | list[int]]:
     bonus_size = BONUS_SIZE

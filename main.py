@@ -1,8 +1,14 @@
 import pygame.time
+import os
 
 from factories import *
-from events import CREATE_ENEMY, CREATE_BONUS
-from collors import *
+from constants.events import CREATE_ENEMY, CREATE_BONUS, GOOSE_ANIMATE
+from constants.collors import *
+from constants.sizes import PLAYER_SIZE
+
+GOOSE_PATH = "images/goose"
+
+PLAYER_IMAGES = os.listdir(GOOSE_PATH)
 
 
 def main() -> None:
@@ -22,12 +28,13 @@ def main() -> None:
     main_display = pygame.display.set_mode((WIDTH, HEIGHT))
     font = pygame.font.SysFont("Verdana", 20)
     clock = pygame.time.Clock()
-    [player, player_rect, player_move] = create_player()
+    [player, player_rect, _] = create_player()
     score = 0
-
+    image_index = 0
     is_playing = True
     pygame.time.set_timer(CREATE_ENEMY, 500)
     pygame.time.set_timer(CREATE_BONUS, 200)
+    pygame.time.set_timer(GOOSE_ANIMATE, 250)
     enemies = []
     bonuses = []
     while is_playing:
@@ -44,9 +51,14 @@ def main() -> None:
                 is_playing = False
             if event.type == CREATE_ENEMY:
                 enemies.append(create_enemy())
-
             if event.type == CREATE_BONUS:
                 bonuses.append(create_bonus())
+            if event.type == GOOSE_ANIMATE:
+                image = pygame.image.load(os.path.join(GOOSE_PATH, PLAYER_IMAGES[image_index])).convert_alpha()
+                player = pygame.transform.scale(image, PLAYER_SIZE)
+                image_index += 1
+                if image_index >= len(PLAYER_IMAGES):
+                    image_index = 0
         keys = pygame.key.get_pressed()
         player_speed = [0, 0]
 
@@ -84,6 +96,7 @@ def main() -> None:
         clock.tick(120)
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
