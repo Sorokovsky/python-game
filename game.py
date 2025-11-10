@@ -18,6 +18,7 @@ class Game:
         self._behaviors = []
 
     def add_behaviour(self: "Game", behaviour: Behaviour) -> None:
+        behaviour.start()
         self._behaviors.append(behaviour)
 
     def start(self: "Game") -> None:
@@ -25,7 +26,6 @@ class Game:
         self._display = set_mode((WIDTH, HEIGHT))
         self._is_running = True
         post(Event(START_GAME))
-        [behaviour.start() for behaviour in self._behaviors]
         self._loop()
 
     def _loop(self: "Game") -> None:
