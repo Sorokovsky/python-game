@@ -1,7 +1,7 @@
 from pygame import Surface, init
 from pygame.constants import QUIT
 from pygame.display import set_mode, flip
-from pygame.event import post, get
+from pygame.event import post, get, Event
 from pygame.key import get_pressed
 
 from behavious.behaviour import Behaviour
@@ -23,9 +23,12 @@ class Game:
     def start(self: "Game") -> None:
         init()
         self._display = set_mode((WIDTH, HEIGHT))
-        post(START_GAME)
+        self._is_running = True
+        post(Event(START_GAME))
+        [behaviour.start() for behaviour in self._behaviors]
+        self._loop()
 
-    def loop(self: "Game") -> None:
+    def _loop(self: "Game") -> None:
         while self._is_running:
             self._process__events()
             self._process_inputs()
