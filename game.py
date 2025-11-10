@@ -14,7 +14,7 @@ class Game:
     _display: Surface
     _is_running = False
 
-    def __int__(self: "Game") -> None:
+    def __init__(self: "Game") -> None:
         self._behaviors = []
 
     def add_behaviour(self: "Game", behaviour: Behaviour) -> None:
