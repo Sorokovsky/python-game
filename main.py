@@ -39,7 +39,7 @@ def main() -> None:
     bonuses = []
     while is_playing:
         background_x1 -= background_move
-        background_move -= background_move
+        background_x2 -= background_move
         if background_x1 < -background.get_width():
             background_x1 = background.get_width()
         if background_x2 < -background.get_width():
