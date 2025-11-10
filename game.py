@@ -1,4 +1,5 @@
 from pygame import Surface, init
+from pygame.display import set_caption
 from pygame.constants import QUIT
 from pygame.display import set_mode, flip
 from pygame.event import post, get, Event
@@ -19,6 +20,7 @@ class Game:
 
     def __init__(self: "Game") -> None:
         init()
+        set_caption("Гусак")
         self._behaviors = []
         self._clock = Clock()
 
