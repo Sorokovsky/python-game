@@ -3,9 +3,7 @@ import os
 import pygame.time
 
 from behavious.background import Background
-from constants.collors import *
 from constants.events import CREATE_ENEMY, CREATE_BONUS, GOOSE_ANIMATE
-from constants.sizes import PLAYER_SIZE
 from factories import *
 from game import Game
 
