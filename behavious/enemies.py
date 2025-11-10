@@ -8,11 +8,12 @@ from random import randint
 from behavious.behaviour import Behaviour
 from constants.events import CREATE_ENEMY, ENEMY_PLAYER_COLLIDED, STOP_GAME, PLAYER_MOVED
 from constants.sizes import WIDTH, HEIGHT
+from helpers.load_image import load_image
 
 
 class Enemies(Behaviour):
-    _size: Tuple[int, int] = (30, 30)
-    _color: Tuple[int, int, int] = (0, 0, 255)
+    _size: Tuple[int, int] = (68, 24)
+    _image_path: str = "images/enemy.png"
     _enemies: list[list[Surface | Rect | list[int]]] = []
     _timeout: int = 500
     _player: Surface | Rect | list[int] | None = None
@@ -47,8 +48,7 @@ class Enemies(Behaviour):
 
     def _create(self: "Enemies") -> list[Surface | Rect | list[int]]:
         enemy_size = self._size
-        enemy = Surface(enemy_size)
-        enemy.fill(self._color)
+        enemy = load_image(self._image_path, enemy_size)
         enemy_rect = Rect(WIDTH, randint(0, HEIGHT), *enemy_size)
         enemy_move = [randint(-8, -4), 0]
         return [enemy, enemy_rect, enemy_move]

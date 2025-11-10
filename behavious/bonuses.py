@@ -9,11 +9,12 @@ from pygame.time import set_timer
 from behavious.behaviour import Behaviour
 from constants.sizes import WIDTH, HEIGHT
 from constants.events import PLAYER_MOVED, CREATE_BONUS, BONUS_PLAYER_COLLIDED
+from helpers.load_image import load_image
 
 
 class Bonuses(Behaviour):
-    _size: Tuple[int, int] = (40, 40)
-    _color: Tuple[int, int, int] = (255, 0, 0)
+    _size: Tuple[int, int] = (44, 74)
+    _image_path: str = "images/bonus.png"
     _player: Rect | None = None
     _bonuses: list[list[Surface | Rect | list[int]]] = []
     _spawn_timeout: int = 250
@@ -45,8 +46,7 @@ class Bonuses(Behaviour):
     
     def _create(self: "Bonuses") -> list[list[int | Rect] | Rect]:
         bonus_size = self._size
-        bonus = Surface(bonus_size)
-        bonus.fill(self._color)
+        bonus = load_image(self._image_path, bonus_size)
         bonus_rect = Rect(WIDTH, randint(0, HEIGHT), *bonus_size)
         bonus_move = [randint(-8, -4), 0]
         return [bonus, bonus_rect, bonus_move]
